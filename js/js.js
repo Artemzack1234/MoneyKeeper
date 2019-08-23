@@ -1,16 +1,16 @@
-let starts=document.querySelectorAll('#start'),
-budgetvalue = document.querySelectorAll('.budget-value'),
-daybudgetvalue=document.querySelectorAll('.daybudget-value'),
-levelvalue = document.querySelectorAll('.level-value'),
-expensesvalue=document.querySelectorAll('.expenses-value'),
-optionalexpensesvalue=document.querySelectorAll('.optionalexpenses-value'),
-incomevalue=document.querySelectorAll('.income-value'),
-monthsavingsvalue=document.querySelectorAll('.monthsavings-value'),
-yearsavingsvalue=document.querySelectorAll('.yearsavings-value'),
-expensesitem=document.querySelectorAll('.expenses-item'),
-countbudgetbtn =document.querySelectorAll('.count-budget-btn'),//Рассчитать
-optionalexpensesbtn =document.querySelectorAll('.optionalexpenses-btn'),//Утвердить
-expensesitembtn =document.querySelectorAll('.expenses-item-btn'),///\\\
+let starts=document.getElementById('start'),
+budgetvalue = document.getElementsByClassName('budget-value')[0],
+daybudgetvalue=document.getElementsByClassName('daybudget-value')[0],
+levelvalue = document.getElementsByClassName('level-value')[0],
+expensesvalue=document.getElementsByClassName('expenses-value')[0],
+optionalexpensesvalue=document.getElementsByClassName('optionalexpenses-value')[0],
+incomevalue=document.getElementsByClassName('income-value')[0],
+monthsavingsvalue=document.getElementsByClassName('monthsavings-value')[0],
+yearsavingsvalue=document.getElementsByClassName('yearsavings-value')[0],
+expensesitem=document.getElementsByClassName('expenses-item'),
+countbudgetbtn =document.getElementsByTagName('buttom')[0],//Рассчитать
+optionalexpensesbtn =document.getElementsByTagName('buttom')[1],//Утвердить
+expensesitembtn =document.getElementsByTagName('buttom')[2],///\\\
 optionalexpensesitem =document.querySelectorAll('.optionalexpenses-item'),
 chooseincome =document.querySelector('.choose-income'),
 savings =document.querySelector('#savings'),
@@ -21,15 +21,40 @@ monthvalue =document.querySelector('.month-value'),
 dayvalue =document.querySelector('.day-value')
 ;
 let money,time;
-function start (){
-money = +prompt("Сколько ты зарабатываешь?")
- time =prompt("Введите дату в формате YYYY-MM-DD");
- while(money==""||money==null||isNaN(money)){
-  money = +prompt("Сколько ты зарабатываешь?");
- }
+starts.addEventListener('click',function(){
+  money = +prompt("Сколько ты зарабатываешь?")
+  time =prompt("Введите дату в формате YYYY-MM-DD");
 
-}
-start();
+  while(money==""||money==null||isNaN(money)){
+   money = +prompt("Сколько ты зарабатываешь?");
+  }
+ appDate.bydget=money;
+ appDate.timeData=time;
+ budgetvalue.textContent=money.toFixed();
+ yearvalue.value=new Date(Date.parse(time)).getFullYear();
+ monthvalue.value=new Date(Date.parse(time)).getMonth() +1;
+ dayvalue.value =new Date(Date.parse(time)).getDay();
+});
+optionalexpensesbtn.addEventListener('click',function(){
+ let sum=0;
+  for(let i=0;i<expensesitem.length;i++)
+  {
+   let a=expensesitem[i].value,
+       b=expensesitem[++i].value; 
+
+   if((typeof(a))==='string'&& (typeof(a)) !=null && (typeof(b)) !=null
+   && a !=''&& b !=''&& a.length<50){
+     
+
+   appDate.expenses[a]=b;
+   sum += +b
+  }
+  else {                            
+   i--;
+       }
+   }
+   expensesvalue.textContent=sum;
+});
 let appDate ={
 bydget: money,
 timeData:time,
@@ -37,23 +62,6 @@ expenses:{},
 optionalExpenses:{},
 income:{},
 savings:true,
-chooseExpenses:function(){
-  for(let i=0;i<2;i++)
- {
-  let a=prompt("Введите обязательную статью расходов в этом месяце",''),
-  b=prompt("Во сколько обойдется?",'');
-  if((typeof(a))==='string'&& (typeof(a)) !=null && (typeof(b)) !=null
-  && a !=''&& b !=''&& a.length<50){
-    console.log("done");
-  appDate.expenses[a]=b;
- 
- }
- else {                            
-  console.log ("еще раз");
-  i--;
-      }
-  }
-},
 chooseOptExpenses:function  (){
   for(let c=1;c<4;c++)
   {
