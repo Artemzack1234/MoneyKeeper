@@ -1,4 +1,4 @@
-let starts=document.getElementById('start'),
+let starts=document.getElementById("start"),
 budgetvalue = document.getElementsByClassName('budget-value')[0],
 daybudgetvalue=document.getElementsByClassName('daybudget-value')[0],
 levelvalue = document.getElementsByClassName('level-value')[0],
@@ -8,9 +8,9 @@ incomevalue=document.getElementsByClassName('income-value')[0],
 monthsavingsvalue=document.getElementsByClassName('monthsavings-value')[0],
 yearsavingsvalue=document.getElementsByClassName('yearsavings-value')[0],
 expensesitem=document.getElementsByClassName('expenses-item'),
-countbudgetbtn =document.getElementsByTagName('buttom')[0],//Рассчитать
-optionalexpensesbtn =document.getElementsByTagName('buttom')[1],//Утвердить
-expensesitembtn =document.getElementsByTagName('buttom')[2],///\\\
+expensesitembtn =document.getElementsByTagName('button')[0],//Рассчитать
+optionalexpensesbtn =document.getElementsByTagName('button')[1],//Утвердить
+countbudgetbtn =document.getElementsByTagName('button')[2],///\\\
 optionalexpensesitem =document.querySelectorAll('.optionalexpenses-item'),
 chooseincome =document.querySelector('.choose-income'),
 savings =document.querySelector('#savings'),
@@ -35,8 +35,9 @@ starts.addEventListener('click',function(){
  monthvalue.value=new Date(Date.parse(time)).getMonth() +1;
  dayvalue.value =new Date(Date.parse(time)).getDay();
 });
-optionalexpensesbtn.addEventListener('click',function(){
- let sum=0;
+
+expensesitembtn.addEventListener('click',()=>{
+  let sum=0;
   for(let i=0;i<expensesitem.length;i++)
   {
    let a=expensesitem[i].value,
@@ -47,7 +48,7 @@ optionalexpensesbtn.addEventListener('click',function(){
      
 
    appDate.expenses[a]=b;
-   sum += +b
+   sum += +b;
   }
   else {                            
    i--;
