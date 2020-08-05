@@ -21,7 +21,7 @@ monthvalue =document.querySelector('.month-value'),
 dayvalue =document.querySelector('.day-value')
 ;
 let money,time;
-expensesitembtn.disabled=true;
+expensesitembtn.disabled=true;//отключены функции без расчета бюджета
 optionalexpensesbtn.disabled=true;
 countbudgetbtn.disabled=true;
 starts.addEventListener('click',function(){
